@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+    {# 顶部导航栏 #}
+    <div id="head">
+
+    </div>
+    {# 左侧菜单栏 #}
+    <div id="left_menu">
+        <ul class="tools_list">
+            <li>
+                <a href="" class="interface_tools">接口请求工具 ></a>
+            </li>
+        </ul>
+    </div>
+    {# 中间主页 #}
+    <div id="body">
+        {% block body %}
+        {% endblock %}
+    </div>
+</body>
+</html>
