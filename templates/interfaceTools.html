@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="interface_page">
+        <form action="" method="post">
+            {% csrf_token %}
+            {# url部分 #}
+            <div class="interface_url marginLeft">
+                <div class="url_module">
+                    <select name="method" id="method" class="method">
+                        <option value="GET">GET</option>
+                        <option value="POST">POST</option>
+                    </select>
+                    <input type="text" placeholder="Request URL" class="input_url">
+                    <button type="submit" class="submit">send</button>
+                </div>
+            </div>
+            {# 消息头/消息体按钮 #}
+            <div class="cut_body marginLeft">
+                <span class="parameter">Parameter</span>
+                <span class="header">Header</span>
+            </div>
+            {# 请求体/消息头 #}
+            <div class="data_selector">
+                {# 请求体部分 #}
+                <div class="interface_data">
+                    <table class="data_body">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox"></th>
+                                <th>Key</th>
+                                <th>Value</th>
+                                <th>Description</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td><input type="text" placeholder="key"></td>
+                                <td><input type="text" placeholder="value"></td>
+                                <td><input type="text" placeholder="description"></td>
+                                <td>
+                                    <a href="">
+                                        <i class="iconfont">&#xe659;</i>
+                                    </a>
+                                    <a href="">
+                                        <i class="iconfont">&#xe69c;</i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                {# 消息头部分 #}
+                <div class="interface_head">
+
+                </div>
+            </div>
+
+
+            {# 返回值部分 #}
+            <div class="interface_response">
+
+            </div>
+        </form>
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+    $(function(){
+        parameter_click();
+    });
+
+    function parameter_click(){
+        $('.parameter').click(function () {
+            $(this).css({color: '#1ab394',border: '1px solid #c2c6c6'});
+            $('.header').css({color: '#c2c6c6', border: '0'});
+        });
+        $('.header').click(function(){
+            $(this).css({color: '#1ab394',border: '1px solid #c2c6c6'});
+            $('.parameter').css({color: '#c2c6c6', border: '0'});
+        });
+    }
+    </script>
+{% endblock %}

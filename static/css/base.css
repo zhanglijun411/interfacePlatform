@@ -1,3 +1,27 @@
+@import "interface.css";
+* {
+    padding: 0;
+    margin: 0;
+}
+
+@font-face {
+  font-family: 'iconfont';
+  src: url('iconfont/iconfont.woff2?t=1677636308231') format('woff2'),
+       url('iconfont/iconfont.woff?t=1677636308231') format('woff'),
+       url('iconfont/iconfont.ttf?t=1677636308231') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+    height: 100%;
+}
 body {
     width: 100%;
     height: 100%;
@@ -5,6 +29,11 @@ body {
     color: black;
     margin: 0;
     padding: 0;
+}
+
+a {
+    text-decoration: none;
+    font-size: 12px;
 }
 
 #menu_color {
@@ -30,16 +59,46 @@ body {
     height: 100%;
 }
 
+#left_menu .tools_list .level {
+    width: 100%;
+    height: 100%;
+}
+
+#left_menu .tools_list .level i {
+    display: inline-block;
+    right: 0;
+    /*margin-right: 10px;*/
+}
+
 #left_menu .tools_list li {
     width: 280px;
+    height: 40px;
+    list-style: none;
+    text-decoration: none;
+    display: none;
+}
+
+#left_menu .tools_list .level .tools_sum {
+    float: left;
+    display: inline-block;
     height: 50px;
+    font-size: 16px;
+    line-height: 50px;
+    text-align: center;
+    width: 240px;
+}
+
+#left_menu .tools_list .level .iconfont {
+    display: inline-block;
+    float: right;
+    margin-right: 8px;
 }
 
 #body {
     margin-top: 5px;
     height: 100%;
     width: calc(100% - 245px);
-    background-color: #dbd0c1;
+    /*background-color: #dbd0c1;*/
     float: right;
 }
 
