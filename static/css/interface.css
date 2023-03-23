@@ -1,6 +1,11 @@
 #body .interface_page {
     width: 1200px;
     height: 100%;
+    margin-left: 50px;
+}
+
+.font_color {
+    color: #1ab394;
 }
 
 .marginLeft {
@@ -10,54 +15,74 @@
 #body .interface_page .interface_url {
     width: 100%;
     height: 60px;
-    border: 1px solid gray;
-    margin-top: 10px;
+    border: 1px solid #acabab;
 }
 
-.interface_page .interface_url .url_module {
-    position: relative;
-    width: calc(100% - 90px);
-    height: 40px;
-    margin-left: 10px;
-    margin-top: 10px;
-    float: left;
-}
+/*.interface_page .interface_url .url_module {*/
+/*    position: relative;*/
+/*    width: calc(100% - 90px);*/
+/*    height: 40px;*/
+/*    margin-left: 10px;*/
+/*    margin-top: 10px;*/
+/*    !*float: left;*!*/
+/*}*/
 
-.interface_page .interface_url .url_module .method {
-    height: 40px;
+.interface_page .interface_url .method {
+    height: 42px;
     width: 80px;
+    border: 1px solid #acabab;
+    text-align: center;
+    margin-top: 9px;
+    float: left;
+    margin-left: 10px;
+    border-radius: 3px;
+    color: #a4a7a7;
 }
 
-.interface_page .interface_url .url_module .input_url {
+option {
+    font-size: 16px;
+    background-color: #1ab394;
+}
+
+.interface_page .interface_url .input_url {
     width: 600px;
     height: 40px;
     padding: 0;
-    border: 1px solid gray;
+    border: 1px solid #acabab;
     font-size: 18px;
+    margin-top: 10px;
+    margin-left: 5px;
+    float: left;
+    border-radius: 3px;
 }
 
-.interface_page .interface_url .url_module .submit {
+.interface_page .interface_url .submit {
     width: 80px;
     height: 42px;
     font-size: 18px;
+    margin-top: 10px;
+    margin-left: 5px;
+    float: left;
+    border-radius: 3px;
+    border: 1px solid #acabab;
 }
 
 .cut_body {
-    width: 1200px;
-    height: 40px;
+    width: 1000px;
+    height: 35px;
     margin-top: 10px;
 }
 
 .cut_body span {
     font-size: 14px;
-    color: #c2c6c6;
+    color: #a4a7a7;
     font-weight: bold;
-    width: 100px;
-    padding: 0;
-    line-height: 40px;
+    width: 90px;
+    height: 35px;
+    line-height: 35px;
     text-align: center;
-    display: inline-block;
-    height: 40px;
+    top: auto;
+    float: left;
 }
 
 .cut_body span:hover {
@@ -65,8 +90,55 @@
     color: black;
 }
 
-.interface_page .data_selector {
+.data_selector {
     margin-top: 10px;
+    height: 100%;
+    width: 1200px;
 }
+
+.data_selector table {
+    border: 1px solid #a4a7a7;
+    border-collapse: collapse;
+}
+
+.interface_data thead,
+.interface_head thead {
+    background-color: #cdc9c9;
+    padding: 0;
+    margin: 0;
+}
+
+.interface_data th,
+.interface_head th {
+    font-size: 16px;
+}
+
+.interface_data td,
+.interface_head td {
+    padding: 2px 0;
+}
+
+.interface_data .checkbox,
+.interface_head .checkbox {
+    padding: 5px 5px;
+}
+
+.data_body input {
+    height: 24px;
+}
+
+.data_body .param {
+    width: 280px;
+}
+
+.data_body .operation {
+    width: 80px;
+}
+
+.data_body i {
+    font-size: 22px;
+}
+
+
 
 

@@ -1,18 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block body %}
     <div class="interface_page">
         <form action="" method="post">
             {% csrf_token %}
             {# url部分 #}
             <div class="interface_url marginLeft">
-                <div class="url_module">
-                    <select name="method" id="method" class="method">
-                        <option value="GET">GET</option>
-                        <option value="POST">POST</option>
-                    </select>
-                    <input type="text" placeholder="Request URL" class="input_url">
-                    <button type="submit" class="submit">send</button>
-                </div>
+                <select name="method" id="method" class="method">
+                    <option value="GET">GET</option>
+                    <option value="POST">POST</option>
+                </select>
+                <input type="text" placeholder="Request URL" class="input_url">
+                <button type="submit" class="submit font_color">send</button>
             </div>
             {# 消息头/消息体按钮 #}
             <div class="cut_body marginLeft">
@@ -22,42 +21,58 @@
             {# 请求体/消息头 #}
             <div class="data_selector">
                 {# 请求体部分 #}
-                <div class="interface_data">
+                <div class="interface_data marginLeft">
                     <table class="data_body">
                         <thead>
                             <tr>
-                                <th><input type="checkbox"></th>
+                                <th class="checkbox"><input type="checkbox" class="checkAll"></th>
                                 <th>Key</th>
                                 <th>Value</th>
                                 <th>Description</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="data_tb">
                             <tr>
-                                <td><input type="checkbox"></td>
-                                <td><input type="text" placeholder="key"></td>
-                                <td><input type="text" placeholder="value"></td>
-                                <td><input type="text" placeholder="description"></td>
-                                <td>
-                                    <a href="">
-                                        <i class="iconfont">&#xe659;</i>
-                                    </a>
-                                    <a href="">
-                                        <i class="iconfont">&#xe69c;</i>
-                                    </a>
+                                <td class="checkbox"><input type="checkbox" name="choice"></td>
+                                <td><input type="text" name="key" placeholder="key"></td>
+                                <td><input class="param" type="text" name="value" placeholder="value"></td>
+                                <td><input class="param" type="text" name="description" placeholder="description"></td>
+                                <td class="operation">
+                                    <i class="iconfont" id="add_data">&#xe612;</i>
+                                    <i class="iconfont" id="del_data">&#xe69c;</i>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 {# 消息头部分 #}
-                <div class="interface_head">
-
+                <div class="interface_head marginLeft" style="display: none">
+                    <table class="data_body">
+                        <thead>
+                            <tr>
+                                <th class="checkbox"><input type="checkbox"></th>
+                                <th>Key</th>
+                                <th>Value</th>
+                                <th>Description</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody class="head_tb">
+                            <tr>
+                                <td class="checkbox"><input type="checkbox" name="choice"></td>
+                                <td><input type="text" name="key" placeholder="key"></td>
+                                <td><input type="text" class="param" name="value" placeholder="value"></td>
+                                <td><input type="text" class="param" name="description" placeholder="description"></td>
+                                <td class="operation">
+                                    <i class="iconfont" id="add_head">&#xe612;</i>
+                                    <i class="iconfont" id="del_head">&#xe69c;</i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-
-
             {# 返回值部分 #}
             <div class="interface_response">
 
@@ -67,19 +82,54 @@
 {% endblock %}
 {% block script %}
     <script>
-    $(function(){
-        parameter_click();
-    });
+        $(function(){
+            parameter_click();
+            addParameter('head');
+            addParameter('data');
+        });
 
-    function parameter_click(){
-        $('.parameter').click(function () {
-            $(this).css({color: '#1ab394',border: '1px solid #c2c6c6'});
-            $('.header').css({color: '#c2c6c6', border: '0'});
-        });
-        $('.header').click(function(){
-            $(this).css({color: '#1ab394',border: '1px solid #c2c6c6'});
-            $('.parameter').css({color: '#c2c6c6', border: '0'});
-        });
-    }
+        function parameter_click(){
+            $('.parameter').click(function () {
+                $(this).css({color: '#1ab394',border: '1px solid #c2c6c6', borderRadius: '4px'});
+                $('.header').css({color: '#c2c6c6', border: '0'});
+                $('.interface_head').css({display: 'none'});
+                $('.interface_data').css({display: 'block'});
+            });
+            $('.header').click(function(){
+                $(this).css({color: '#1ab394',border: '1px solid #c2c6c6', borderRadius: '4px'});
+                $('.parameter').css({color: '#c2c6c6', border: '0'});
+                $('.interface_data').css({display: 'none'});
+                $('.interface_head').css({display: 'block'});
+            });
+        }
+
+        function addParameter(elem){
+            $('.' + elem + '_tb').on('click', '#add_' + elem, function(){
+                addHtml(elem);
+            });
+            $('.' + elem + '_tb').on('click', '#del_' + elem, function(){
+                if ($('.' + elem + '_tb').children().length > 1){
+                    console.log($(this))
+                    $(this).parent().parent().remove();
+                }
+            })
+        }
+
+        function addHtml(elem) {
+            $('.' + elem + '_tb').append(
+                '<tr>' +
+                    '<td class="checkbox"><input type="checkbox" name="choice"></td>' +
+                    '<td><input type="text" name="key" placeholder="key"></td>' +
+                    '<td><input type="text" class="param" name="value" placeholder="value"></td>' +
+                    '<td><input type="text" class="param" name="description" placeholder="description"></td>' +
+                    '<td class="operation">' +
+                        '<i class="iconfont" id="add_'+elem+'">&#xe612;</i>' +
+                        '<i class="iconfont" id="del_'+elem+'">&#xe69c;</i>' +
+                    '</td>' +
+                '</tr>'
+            );
+        }
     </script>
 {% endblock %}
+
+
