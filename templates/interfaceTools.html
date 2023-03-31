@@ -25,7 +25,7 @@
                     <table class="data_body">
                         <thead>
                             <tr>
-                                <th class="checkbox"><input type="checkbox" class="checkAll"></th>
+{#                                <th class="checkbox"><input type="checkbox" class="checkAll"></th>#}
                                 <th>Key</th>
                                 <th>Value</th>
                                 <th>Description</th>
@@ -34,13 +34,13 @@
                         </thead>
                         <tbody class="data_tb">
                             <tr>
-                                <td class="checkbox"><input type="checkbox" name="choice"></td>
-                                <td><input type="text" name="key" placeholder="key"></td>
+{#                                <td class="checkbox"><input type="checkbox" name="choice" class="check"></td>#}
+                                <td><input type="text" class="key" name="key" placeholder="key"></td>
                                 <td><input class="param" type="text" name="value" placeholder="value"></td>
                                 <td><input class="param" type="text" name="description" placeholder="description"></td>
                                 <td class="operation">
-                                    <i class="iconfont" id="add_data">&#xe612;</i>
-                                    <i class="iconfont" id="del_data">&#xe69c;</i>
+                                    <i class="iconfont font_color" id="add_data">&#xe612;</i>
+                                    <i class="iconfont font_color" id="del_data">&#xe69c;</i>
                                 </td>
                             </tr>
                         </tbody>
@@ -51,7 +51,7 @@
                     <table class="data_body">
                         <thead>
                             <tr>
-                                <th class="checkbox"><input type="checkbox"></th>
+{#                                <th class="checkbox"><input type="checkbox" class="checkAll"></th>#}
                                 <th>Key</th>
                                 <th>Value</th>
                                 <th>Description</th>
@@ -60,13 +60,13 @@
                         </thead>
                         <tbody class="head_tb">
                             <tr>
-                                <td class="checkbox"><input type="checkbox" name="choice"></td>
-                                <td><input type="text" name="key" placeholder="key"></td>
+{#                                <td class="checkbox"><input type="checkbox" name="choice" class="check"></td>#}
+                                <td><input type="text" class="key" name="key" placeholder="key"></td>
                                 <td><input type="text" class="param" name="value" placeholder="value"></td>
                                 <td><input type="text" class="param" name="description" placeholder="description"></td>
                                 <td class="operation">
-                                    <i class="iconfont" id="add_head">&#xe612;</i>
-                                    <i class="iconfont" id="del_head">&#xe69c;</i>
+                                    <i class="iconfont font_color" id="add_head">&#xe612;</i>
+                                    <i class="iconfont font_color" id="del_head">&#xe69c;</i>
                                 </td>
                             </tr>
                         </tbody>
@@ -74,8 +74,19 @@
                 </div>
             </div>
             {# 返回值部分 #}
-            <div class="interface_response">
+            <div class="interface_response marginLeft">
+                <div class="response_title">
+                    <span>Response</span>
+                </div>
+                <div class="response_data">
+                    <div class="response_btn">
+                        <a href="javascript:">折叠</a>
+                        <a href="javascript:">展开</a>
+                    </div>
+                    <div class="response_content">
 
+                    </div>
+                </div>
             </div>
         </form>
     </div>
@@ -86,7 +97,39 @@
             parameter_click();
             addParameter('head');
             addParameter('data');
+            //checkAll();
         });
+
+/*        function checkAll() {
+            $('.checkAll').click(function(){
+                if ($(this).prop('checked')){
+                    $(this).prop('checked', true);
+                    $(this).parents('thead').next().find('.check').prop('checked', true);
+                    {#$('.check').prop('checked', false);#}
+                }else {
+                    $(this).prop('checked', false);
+                    $(this).parents('thead').next().find('.check').prop('checked', false);
+                    {#$('.check').prop('checked', true);#}
+                }
+            });
+        }
+
+*/
+
+        function marge_data(elem) {
+            var data = {};
+            var tr_all = $('.' + elem).children('tr');
+            var tr_num = $('.' + elem).children('tr').length;
+            for (var i = 0; i < tr_num; i++) {
+                var key = tr_all.eq(i).find('.key').val();
+                var value = tr_all.eq(i).find("input[name='value']").val();
+                if (key !== '' && value !== '') {
+                    data[key] = value;
+                }
+            }
+            data = JSON.stringify(data);
+            return data;
+        }
 
         function parameter_click(){
             $('.parameter').click(function () {
@@ -118,13 +161,13 @@
         function addHtml(elem) {
             $('.' + elem + '_tb').append(
                 '<tr>' +
-                    '<td class="checkbox"><input type="checkbox" name="choice"></td>' +
-                    '<td><input type="text" name="key" placeholder="key"></td>' +
+                    {#'<td class="checkbox"><input type="checkbox" name="choice" class="check"></td>' +#}
+                    '<td><input type="text" class="key" name="key" placeholder="key"></td>' +
                     '<td><input type="text" class="param" name="value" placeholder="value"></td>' +
                     '<td><input type="text" class="param" name="description" placeholder="description"></td>' +
                     '<td class="operation">' +
-                        '<i class="iconfont" id="add_'+elem+'">&#xe612;</i>' +
-                        '<i class="iconfont" id="del_'+elem+'">&#xe69c;</i>' +
+                        '<i class="iconfont font_color" id="add_'+elem+'">&#xe612;</i>' +
+                        '<i class="iconfont font_color" id="del_'+elem+'">&#xe69c;</i>' +
                     '</td>' +
                 '</tr>'
             );
