@@ -98,6 +98,7 @@
             addParameter('head');
             addParameter('data');
             //checkAll();
+            send();
         });
 
 /*        function checkAll() {
@@ -118,8 +119,8 @@
 
         function marge_data(elem) {
             var data = {};
-            var tr_all = $('.' + elem).children('tr');
-            var tr_num = $('.' + elem).children('tr').length;
+            var tr_all = $(elem).children('tr');
+            var tr_num = $(elem).children('tr').length;
             for (var i = 0; i < tr_num; i++) {
                 var key = tr_all.eq(i).find('.key').val();
                 var value = tr_all.eq(i).find("input[name='value']").val();
@@ -129,6 +130,38 @@
             }
             data = JSON.stringify(data);
             return data;
+        }
+
+        function send() {
+            $('.submit').click(function(e) {
+                if ($('.input_url').val() === '') {
+                    swal({
+                        title: 'Request URL不能为空',
+                        text: '请输入URL',
+                        type: 'warning'
+                    });
+                }else {
+                    var method = $('.method').val();
+                    var url = $('.input_url').val();
+                    var header = marge_data('.head_tb');
+                    var body = marge_data('.data_tb');
+                    $.post(
+                        '/interface_tools/send/',
+                        {
+                            method: method,
+                            url: url,
+                            header: header,
+                            paramter: body
+                        },
+                        function (data) {
+                            if (data !== '') {
+                                $('.response_content').JSONView(data);
+                            }
+                        }
+
+                    )
+                }
+            });
         }
 
         function parameter_click(){
