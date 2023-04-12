@@ -32,6 +32,14 @@ body {
     padding: 0;
 }
 
+ul {
+    list-style: none;
+}
+
+i {
+    font-style: normal;
+}
+
 a {
     display: block;
     text-decoration: none;

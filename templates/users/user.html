@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'css/user.css' %}">
+</head>
+<body>
+    <h2 class="user_title">{{ title }}</h2>
+{#    {% if tips %}#}
+{#        <i class="user_tips">{{ tips }}</i>#}
+{#    {% endif %}#}
+    <div class="tips_info">
+        <i class="user_tips">用户不存在</i>
+    </div>
+
+    <div class="user">s
+        <form action="" method="post">
+            {% csrf_token %}
+            <ul class="user_input">
+                <li>
+                    <i>用户名：</i>
+                    <input type="text" name="username">
+                </li>
+                <li>
+                    <i>密码：</i>
+                    <input type="text" name="password">
+                </li>
+                {% if not Login %}
+                    <li>
+                        <i>确认密码：</i>
+                        <input type="text" name="password2">
+                    </li>
+                    <li>
+                        <i>姓名：</i>
+                        <input type="text" name="real_name">
+                    </li>
+                    <li>
+                        <i>邮箱：</i>
+                        <input type="text" name="email">
+                    </li>
+                {% endif %}
+            </ul>
+            <div class="user_button">
+                {% if Login %}
+                    <button type="submit" class="login">登录</button>
+                    <button type="submit" class="reg">
+                        <a href="{% url 'users:login' %}">注册</a>
+                    </button>
+                {% else %}
+                    <button type="submit" class="submit">提交</button>
+                    <button type="submit" class="return_login">
+                        <a href="{% url 'users:register' %}">返回登录</a>
+                    </button>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</body>
+</html>

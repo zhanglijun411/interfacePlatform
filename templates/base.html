@@ -6,6 +6,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/jquery.jsonview.min.css' %}">
+    {% block link %}{% endblock %}
 </head>
 <body>
     {# 顶部导航栏 #}
@@ -29,7 +30,7 @@
                     <a href="" class="interface_tools">线上问题</a>
                 </li>
                 <li class="tools_category">
-                    <a href="" class="interface_tools">需求跟进</a>
+                    <a href="{% url 'project:needs' 1 %}" class="interface_tools">需求管理</a>
                 </li>
             </ul>
         </div>
@@ -45,11 +46,11 @@
 <script src="{% static 'js/jquery.jsonview.min.js' %}" type="text/javascript"></script>
 <script src="{% static 'js/icheck.min.js' %}" type="text/javascript"></script>
 <script>
-    var tools_name_tag = true;
+    {#var tools_name_tag = true;#}
     var tools = $('.tools');
-    var tools_name_css = $('.tools_category').css('display')
+    {#var tools_name_css = $('.tools_category').css('display')#}
     $(function(){
-        tools_sum_click("tools");
+        tools_sum_click('tools');
     });
 
     function tools_sum_click (elem) {

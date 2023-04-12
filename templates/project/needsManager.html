@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block link %}
+
+{% endblock %}
+
+{% block body %}
+    <div class="need_page">
+        {# 查询区域 #}
+        <div class="need_search">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="need_name">
+                <input type="text" name="need_name" placeholder="需求名称">
+                </div>
+                <div class="need_status">
+                    <select name="need_status">
+                        <options value="0">未启动</options>
+                        <options value="1">需求沟通中</options>
+                        <options value="2">进行中</options>
+                        <options value="3">验收完成</options>
+                        <options value="4">已撤销</options>
+                    </select>
+                </div>
+                <div class="need_category">
+                    <select name="need_category">
+                        {% for category_name in need_category_name %}
+                            <options value="{{ category_name.id }}">{{ category_name.name }}</options>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="search_button">
+                    <button type="submit" class="submit">查询</button>
+                    <button type="reset" class="reset">重置</button>
+                </div>
+            </form>
+        </div>
+        {# 需求列表区域 #}
+        <div class="need_list">
+            <table>
+                <thead>
+                    <tr class="list_title">
+                        <th>禅道id</th>
+                        <th>需求名称</th>
+                        <th>需求链接</th>
+                        <th>提出方</th>
+                        <th>产品经理</th>
+                        <th>版本号</th>
+                        <th>需求状态</th>
+                        <th>评审时间</th>
+                        <th>所属分类</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for need in pageInfo.object_list %}
+                        <tr class="list_info">
+                            <td>{{ need.zentao_id }}</td>
+                            <td>{{ need.name }}</td>
+                            <td><a href="{{ need.ur }}"></a></td>
+                            <td>{{ need.proposer }}</td>
+                            <td>{{ need.pm }}</td>
+                            <td>{{ need.version }}</td>
+                            <td>{{ need.status }}</td>
+                            <td>{{ need.review_time }}</td>
+                            <td>{{ need.categray }}</td>
+                            {% if perms.Needs.edit_need %}
+                                <td>
+                                    <a href=""><i class="iconfont">&#xe610;</i></a>
+                                    <a href=""><i class="iconfont">&#xe69c;</i></a>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {# 分页区域 #}
+        <div class="need_page">
+            {% if pageInfo.has_previous %}
+                <a href="{% url 'project:needs' pageInfo.previous_page_number %}">上一页</a>
+            {% endif %}
+            {% if pageInfo.object_list %}
+                {% if pageInfo.paginator.page_range %}
+                    {% if pageInfo.number == page %}
+                        <a href="">{{ page }}</a>
+                    {% else %}
+                        <a href="{% url 'project:needs' page %}">{{ page }}</a>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+            {% if pageInfo.has_next %}
+                <a href="{% url 'project:needs' pageInfo.next_page_number %}">下一页</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
