@@ -8,50 +8,53 @@
 </head>
 <body>
     <h2 class="user_title">{{ title }}</h2>
-{#    {% if tips %}#}
-{#        <i class="user_tips">{{ tips }}</i>#}
-{#    {% endif %}#}
     <div class="tips_info">
-        <i class="user_tips">用户不存在</i>
+        {% if tips %}
+            <i class="user_tips">{{ tips }}</i>
+        {% endif %}
     </div>
 
-    <div class="user">s
+{#    <div class="tips_info">#}
+{#        <i class="user_tips">用户不存在</i>#}
+{#    </div>#}
+
+    <div class="user">
         <form action="" method="post">
             {% csrf_token %}
             <ul class="user_input">
                 <li>
                     <i>用户名：</i>
-                    <input type="text" name="username">
+                    <input type="text" name="username" value="{{ username }}">
                 </li>
                 <li>
                     <i>密码：</i>
-                    <input type="text" name="password">
+                    <input type="password" name="password" value="{{ password }}">
                 </li>
                 {% if not Login %}
                     <li>
                         <i>确认密码：</i>
-                        <input type="text" name="password2">
+                        <input type="password" name="password2" value="{{ password2 }}">
                     </li>
                     <li>
                         <i>姓名：</i>
-                        <input type="text" name="real_name">
+                        <input type="text" name="real_name" value="{{ real_name }}">
                     </li>
                     <li>
                         <i>邮箱：</i>
-                        <input type="text" name="email">
+                        <input type="email" name="email" value="{{ email }}">
                     </li>
                 {% endif %}
             </ul>
             <div class="user_button">
                 {% if Login %}
                     <button type="submit" class="login">登录</button>
-                    <button type="submit" class="reg">
-                        <a href="{% url 'users:login' %}">注册</a>
+                    <button class="reg">
+                        <a href="{% url 'users:register' %}">注册</a>
                     </button>
                 {% else %}
                     <button type="submit" class="submit">提交</button>
-                    <button type="submit" class="return_login">
-                        <a href="{% url 'users:register' %}">返回登录</a>
+                    <button type="button" class="return_login">
+                        <a href="{% url 'users:login' %}">返回登录</a>
                     </button>
                 {% endif %}
             </div>

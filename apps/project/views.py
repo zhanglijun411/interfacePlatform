@@ -6,6 +6,7 @@ from apps.common.views import pageinator
 
 # 需求池视图
 def needsView(request, page):
+    page_title = '需求池管理'
     need_name = request.POST.get('need_name', '')
     need_status = request.POST.get('need_status', '')
     need_category = request.POST.get('need_category', '')
