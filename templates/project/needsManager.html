@@ -1,31 +1,31 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block link %}
-
+    <link rel="stylesheet" href="{% static 'css/needsManager.css' %}">
 {% endblock %}
 
 {% block body %}
     <div class="need_page">
         {# 查询区域 #}
-        <div class="need_search">
+        <div class="need_search marginLeft">
             <form action="" method="post">
                 {% csrf_token %}
                 <div class="need_name">
-                <input type="text" name="need_name" placeholder="需求名称">
+                    <input type="text" name="need_name" placeholder="需求名称">
                 </div>
                 <div class="need_status">
-                    <select name="need_status">
-                        <options value="0">未启动</options>
-                        <options value="1">需求沟通中</options>
-                        <options value="2">进行中</options>
-                        <options value="3">验收完成</options>
-                        <options value="4">已撤销</options>
+                    <select name="need_status" class="need_status" id="need_status">
+                        <option value="0">未启动</option>
+                        <option value="1">需求沟通中</option>
+                        <option value="2">进行中</option>
+                        <option value="3">验收完成</option>
+                        <option value="4">已撤销</option>
                     </select>
                 </div>
                 <div class="need_category">
-                    <select name="need_category">
+                    <select name="need_category" class="need_category" id="need_category">
                         {% for category_name in need_category_name %}
-                            <options value="{{ category_name.id }}">{{ category_name.name }}</options>
+                            <option value="{{ category_name.id }}">{{ category_name.name }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -36,7 +36,7 @@
             </form>
         </div>
         {# 需求列表区域 #}
-        <div class="need_list">
+        <div class="need_list marginLeft">
             <table>
                 <thead>
                     <tr class="list_title">

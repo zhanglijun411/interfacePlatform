@@ -24,7 +24,7 @@ def needsView(request, page):
             search_dict['need_category'] = need_category
         data = Needs.objects.filter(**search_dict).order_by('-create_time') # 组合条件查询结果
     pageInfo = pageinator(data, page)   # 分页数据
-    return render(request, 'project/needsManager.html', locals())
+    return render(request, 'project/needs.html', locals())
 
 def projectView(request):
     pass

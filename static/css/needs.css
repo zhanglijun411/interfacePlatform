@@ -1,0 +1,10 @@
+@import "base.css";
+
+.needs_list {
+    width: calc(100% - 15px);
+}
+
+#table thead th {
+    text-align: center;
+}
+
